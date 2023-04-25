@@ -12,10 +12,13 @@ public class Main {
 
   public static void main(String[] args) {
     List<City> cities = readCityData();
-
-    // Print the list of cities
-    for (City city : cities) {
-      System.out.println(city);
+    if (cities != null) {
+      // Print the list of cities
+      for (City city : cities) {
+        System.out.println(city);
+      }
+    } else {
+      System.out.println("Error! The readCityData method returned null");
     }
   }
 
