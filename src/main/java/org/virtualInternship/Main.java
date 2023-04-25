@@ -13,6 +13,9 @@ public class Main {
   public static void main(String[] args) {
     List<City> cities = readCityData();
     if (cities != null) {
+      // CitySorter.sortByCityName(cities);
+      CitySorter.sortByCityDistrictAndName(cities);
+
       // Print the list of cities
       for (City city : cities) {
         System.out.println(city);
@@ -27,9 +30,10 @@ public class Main {
         Scanner scanner = new Scanner(inputStream)) {
       List<City> cities = new ArrayList<>();
       while (scanner.hasNext()) {
-        String[] cityData = scanner.nextLine().split(";");
+        String currentLine = scanner.nextLine();
+        String[] cityData = currentLine.split(";");
         if (cityData.length < 6) {
-          System.err.println("Missing city data at line: " + scanner.nextLine());
+          System.err.println("Missing city data at line: " + currentLine);
           continue;
         }
         try {

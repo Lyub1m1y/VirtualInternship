@@ -20,7 +20,5 @@ public class ReadCityDataTest {
     for (int i = 0; i < 3; i++) {
       Assert.assertEquals(expectedCities.get(i), actualCities.get(i));
     }
-
   }
-
 }
