@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -13,8 +14,12 @@ public class Main {
   public static void main(String[] args) {
     List<City> cities = readCityData();
     if (cities != null) {
-      int[] max = findCityWithMaxPopulation(cities);
-      System.out.println("[" + max[1] + "] = " + max[0]);
+      Map<String, Integer> citiesByRegion = CityUtils.countCitiesByRegion(cities);
+
+      // print citiesByRegion
+      for (Map.Entry<String, Integer> entry : citiesByRegion.entrySet()) {
+        System.out.println(entry.getKey() + " - " + entry.getValue());
+      }
     } else {
       System.out.println("Error! The readCityData method returned null");
     }
@@ -36,7 +41,7 @@ public class Main {
               cityData[5]);
           cities.add(city);
         } catch (NumberFormatException e) {
-          System.err.println("Invalid population value at line: " + scanner.nextLine());
+          System.err.println("Invalid population value at line: " + currentLine);
         }
       }
       return cities;
@@ -44,19 +49,5 @@ public class Main {
       System.err.println("An error occurred while working with the file: " + e.getMessage());
     }
     return null;
-  }
-
-  public static int[] findCityWithMaxPopulation(List<City> cities) {
-    City[] citiesArray = cities.toArray(new City[cities.size()]);
-
-    int[] max = new int[2]; // max[0] == maxPopulation, max[1] == maxPopulationIndex
-
-    for (int i = 0; i < citiesArray.length; i++) {
-      if (citiesArray[i].getPopulation() > max[0]) {
-        max[0] = citiesArray[i].getPopulation();
-        max[1] = i;
-      }
-    }
-    return max;
   }
 }
