@@ -1,8 +1,8 @@
 package org.virtualInternship.test;
 
+import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
 import org.virtualInternship.City;
 import org.virtualInternship.Main;
@@ -18,7 +18,7 @@ public class ReadCityDataTest {
 
     List<City> actualCities = Main.readCityData();
     for (int i = 0; i < 3; i++) {
-      Assert.assertEquals(expectedCities.get(i), actualCities.get(i));
+      assertEquals(expectedCities.get(i), actualCities.get(i));
     }
   }
 }
