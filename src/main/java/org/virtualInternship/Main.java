@@ -13,13 +13,8 @@ public class Main {
   public static void main(String[] args) {
     List<City> cities = readCityData();
     if (cities != null) {
-      // CitySorter.sortByCityName(cities);
-      CitySorter.sortByCityDistrictAndName(cities);
-
-      // Print the list of cities
-      for (City city : cities) {
-        System.out.println(city);
-      }
+      int[] max = findCityWithMaxPopulation(cities);
+      System.out.println("[" + max[1] + "] = " + max[0]);
     } else {
       System.out.println("Error! The readCityData method returned null");
     }
@@ -49,5 +44,19 @@ public class Main {
       System.err.println("An error occurred while working with the file: " + e.getMessage());
     }
     return null;
+  }
+
+  public static int[] findCityWithMaxPopulation(List<City> cities) {
+    City[] citiesArray = cities.toArray(new City[cities.size()]);
+
+    int[] max = new int[2]; // max[0] == maxPopulation, max[1] == maxPopulationIndex
+
+    for (int i = 0; i < citiesArray.length; i++) {
+      if (citiesArray[i].getPopulation() > max[0]) {
+        max[0] = citiesArray[i].getPopulation();
+        max[1] = i;
+      }
+    }
+    return max;
   }
 }
